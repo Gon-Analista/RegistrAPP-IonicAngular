@@ -1,13 +1,85 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>asistencia</ion-title>
+    <ion-title >
+  
+    <ion-header>
+      <ion-toolbar color="light">
+        <ion-buttons slot="start">
+          <ion-img src="assets/img/duoc.jpg" class="duoc-icon"></ion-img>
+        </ion-buttons>
+        <ion-title class="title">Inicio</ion-title>
+        <ion-buttons slot="end">
+          <ion-avatar class="perfil">
+            <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
+          </ion-avatar>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">asistencia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header collapse="condense">
+  <ion-toolbar>
+    <ion-title size="large">perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="container">
+<div class="barra">
+  <ion-segment value="asistencia">
+    <ion-segment-button value="Asistencia" >
+      <ion-label>Asistencia</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="perfil" (click)="gotoPerfil()">
+      <ion-label>Perfil</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+</div>
+
+
+<div >
+
+  <div class="container">
+    <div class="cabeza ion-padding">
+      <ion-avatar class="avatar-container">
+        <img alt="Silhouette of a person's head" src="assets/img/QR.png" />
+      </ion-avatar>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <div class="contenido">
+    <ion-list>
+      <ion-item>
+        <ion-label>Programacion Movil</ion-label>
+        <ion-badge color="success">100%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Portafolio</ion-label>
+        <ion-badge color="danger">20%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Base de Datos</ion-label>
+        <ion-badge color="warning">50%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Arquitectura</ion-label>
+        <ion-badge color="success">80%</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</div>
+<footer>
+<div >
+    <p class="footer">Privacy Policy - Duoc Uc</p>
+</div>
+</footer>
+
 </ion-content>
