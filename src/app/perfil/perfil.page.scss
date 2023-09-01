@@ -1,0 +1,70 @@
+#container {
+    text-align: center;
+    margin-top: 25px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+  
+    color: #8c8c8c;
+  
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+  .img1{
+    width: 75px;
+    margin-top: 5px;
+    
+  }
+  
+  .title{
+    margin: 1px;
+    margin-left: 7px;
+    padding: 15px;
+    position: absolute;
+  }
+  .perfil{
+    margin-left: 190px;
+    margin-top: -55px;
+    position: relative;
+    font-size: 10px;
+    width: 90px;
+    
+  }
+  
+  
+  .avatar{
+    margin-top: 10px;
+    margin-left: 110px;
+    margin-right: 0px;
+  
+  }
+  .contenido{
+    margin-top: 5px;
+    margin: 35px;
+    margin-left: 15px;
+    margin-right: 15px;
+    
+    
+  }
+  .tabs{
+     
+    padding: auto;
+    margin: 150px;
+  }
+  

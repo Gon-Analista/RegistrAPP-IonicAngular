@@ -3,23 +3,20 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Route, Router } from '@angular/router';
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-perfil',
+  templateUrl: './perfil.page.html',
+  styleUrls: ['./perfil.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class LoginPage implements OnInit {
+export class PerfilPage implements OnInit {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
-
-  gotoPerfil(){
-    this.router.navigate(['/perfil'])
+  gotoAsis(){
+    this.router.navigate(['/asistencia'])
   }
-
 }
