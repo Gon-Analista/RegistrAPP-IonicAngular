@@ -9,6 +9,7 @@
           <ion-avatar class="perfil">
             <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
           </ion-avatar>
+          <p id="username">{{ userInfoReceived?.username }} </p>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -48,9 +49,8 @@
   
   <div class="container texto">
     <br>
-    <ion-label class="texto">Bienvenido {{ userInfoReceived?.username }}</ion-label>
+    <ion-label class="texto" >Bienvenido {{ userInfoReceived?.name }} {{ userInfoReceived?.last_name }}</ion-label>
 </div>
-  <br>
   <br>
   <div class="contenido">
 
@@ -76,7 +76,6 @@
 
     <ion-item href="#">
       <ion-icon name="log-out"></ion-icon>
-
       <ion-label>Cerrar sesion</ion-label>
     </ion-item>
   </div>

@@ -29,17 +29,17 @@
 
 .title {
   font-size: 20px;
-  margin-right: 35px;
+  margin-left: 15px;
 }
 
 .perfil {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
 }
 
 .duoc-icon {
-  width: 80px; /* Ajusta el ancho según tus necesidades */
-  height: auto; /* Mantiene la proporción original */
+  width: 80px;
+  height: auto; 
   
 }
 
@@ -71,4 +71,10 @@
   margin-top: 80%;
 }
 
+ion-item ion-icon {
+  margin-right: 20px; 
+}
 
+#username {
+  margin-left: 5px;
+}
