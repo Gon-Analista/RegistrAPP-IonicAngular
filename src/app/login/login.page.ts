@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
             user: this.listUser[i]
           }
         }
+
         let sendInfo = this.router.navigate(['/perfil'], userInfoSend);
       }
       else{

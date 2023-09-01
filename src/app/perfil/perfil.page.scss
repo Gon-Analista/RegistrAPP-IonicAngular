@@ -6,6 +6,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    
   }
   
   #container strong {
@@ -25,47 +26,75 @@
   #container a {
     text-decoration: none;
   }
-  
-  .img1{
-    width: 75px;
-    margin-top: 5px;
-    
-  }
+
+
+/* Estilos personalizados para el encabezado */
+.title {
+  font-size: 20px;
+}
+
+.perfil {
+    height: 30px;
+    width: 30px;
+}
+
+.duoc-icon {
+  width: 50px; /* Ajusta el ancho según tus necesidades */
+  height: auto; /* Mantiene la proporción original */
+}
+
+/* Estilos para centrar el contenido debajo del encabezado */
+ion-content {
+  --ion-padding-top: 70px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+}
+
+/* Evita cambios de color en el encabezado */
+ion-header {
+  --ion-background-color: transparent;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  --box-shadow: none;
+}
 
   
-  .title{
-    margin: 1px;
-    margin-left: 7px;
-    padding: 15px;
-    position: absolute;
-  }
-  .perfil{
-    margin-left: 190px;
-    margin-top: -55px;
-    position: relative;
-    font-size: 10px;
-    width: 90px;
+  
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px; /* Añade un margen superior si es necesario */
+    margin-left: 40%;
     
-  }
+    
+} 
+.avatar-image {
+     /* La imagen se ajustará automáticamente al ancho máximo del contenedor */
+   
+    width: 350%;
+    height: 130%;
+}
   
   
-  .avatar{
-    margin-top: 10px;
-    margin-left: 110px;
-    margin-right: 0px;
-  
-  }
-  .contenido{
+.contenido{
     margin-top: 5px;
     margin: 35px;
     margin-left: 15px;
     margin-right: 15px;
     
     
-  }
-  .tabs{
+}
+
+.texto{
+    text-align: center;
+}
+
+.tabs{
      
     padding: auto;
-    margin: 150px;
-  }
   
+}
+
+

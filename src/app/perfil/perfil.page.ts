@@ -13,6 +13,7 @@ import { UserModel } from 'src/app/models/UserModel';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class PerfilPage implements OnInit{
+
   
   userInfoReceived: UserModel | undefined;
   idUserHtmlRouterLink: any;
