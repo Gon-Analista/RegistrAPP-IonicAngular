@@ -49,7 +49,6 @@ export class LoginPage implements OnInit {
         }
 
         let sendInfo = this.router.navigate(['/perfil'], userInfoSend);
-
       }
       else{
         console.log('User not found');
@@ -63,6 +62,9 @@ export class LoginPage implements OnInit {
   userLoginModalRestart(): void{
     this.userLoginModal.username = '';
     this.userLoginModal.password = '';
+  }
+  gotoRest(){
+    this.router.navigate(['/restablecer'])
   }
 
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule} from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { UserModel } from 'src/app/models/UserModel';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +14,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class PerfilPage implements OnInit{
 
+  
   userInfoReceived: UserModel | undefined;
   idUserHtmlRouterLink: any;
-  
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, public alerta:AlertController) {
+  constructor(private router: Router) {
     this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['user'];
    }
 
@@ -28,13 +27,5 @@ export class PerfilPage implements OnInit{
   gotoAsis(){
     this.router.navigate(['/asistencia'])
   }
-  async presentAlert() {
-    const alert = await this.alerta.create({
-      header: 'Título de la Alerta',
-      message: 'Mensaje de la Alerta',
-      buttons: ['OK']
-    });
-  
-    await alert.present();
-  }
 }
+
