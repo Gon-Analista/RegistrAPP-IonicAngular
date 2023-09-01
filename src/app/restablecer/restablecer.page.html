@@ -19,16 +19,20 @@
       <div class="img1">
         <ion-img src="assets/img/app-logo.png" ></ion-img>
       </div>
-      <ion-input label="Nombre de usuario" label-placement="floating" fill="solid" placeholder="Usuario" [(ngModel)]="userLoginModal.username"></ion-input>
+      <ion-input label="Nueva Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña"></ion-input>
       <br/>  
-      <ion-input label="Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="userLoginModal.password"></ion-input>
-      <div class="cabeza2">
-        <a href="/restablecer">Olvidaste tu Contraseña?</a>
-      </div>
+      <ion-input label="Confirmar Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Confirmar Contraseña" ></ion-input>
+      <br>
       <div class="btn1">
-        <ion-button (click)="userLogin(userLoginModal)">Ingresar</ion-button>
+        <ion-button>Confirmar Contraseña</ion-button>
       </div>
-    </div>  
+    </div>
+    <div class="btn2">
+      <ion-button fill="clear" href="/login">
+        <ion-icon name="arrow-back-outline" ></ion-icon>
+        Volver
+      </ion-button>
+    </div>
 
   </div>
   <footer>
