@@ -32,8 +32,8 @@ export class LoginPage implements OnInit {
     this.userLoginModalRestart();
   }
 
-  gotoHome(){
-    this.router.navigate(['/home'])
+  gotoPerfil(){
+    this.router.navigate(['/perfil'])
   }
   
   userLogin(userLoginInfo: IUserLogin): boolean{
