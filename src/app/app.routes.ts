@@ -16,9 +16,14 @@ export const routes: Routes = [
     loadComponent: () => import('./asistencia/asistencia.page').then( m => m.AsistenciaPage)
   },
   {
+    path: 'restablecer',
+    loadComponent: () => import('./restablecer/restablecer.page').then( m => m.RestablecerPage)
+  },
+  {
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',
   }
+
 
 ];

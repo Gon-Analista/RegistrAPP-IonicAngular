@@ -62,5 +62,8 @@ export class LoginPage implements OnInit {
     this.userLoginModal.username = '';
     this.userLoginModal.password = '';
   }
+  gotoRest(){
+    this.router.navigate(['/restablecer'])
+  }
 
 }
