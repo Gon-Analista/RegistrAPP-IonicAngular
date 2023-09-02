@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/models/UserModel';
 
 @Component({
   selector: 'app-asistencia',
-  templateUrl: './asistencia.page.html',
-  styleUrls: ['./asistencia.page.scss'],
+  templateUrl: '/asistencia.page.html',
+  styleUrls: ['/asistencia.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class AsistenciaPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit() {
   }
