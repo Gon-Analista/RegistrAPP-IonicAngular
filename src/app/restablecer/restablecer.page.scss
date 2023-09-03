@@ -31,3 +31,12 @@ div.btn2 ion-button {
     text-align: left;
      
   }
+
+.buttons {
+  transform: scale(1); /* Tamaño original */
+  transition: transform 0.7s; /* Duración de la animación */
+}
+
+.buttons:hover {
+  transform: scale(1.06); /* Aumenta el tamaño en un 10% cuando el mouse está sobre el botón */
+}

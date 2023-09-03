@@ -19,16 +19,18 @@
       <div class="img1">
         <ion-img src="assets/img/app-logo.png" ></ion-img>
       </div>
-      <ion-input label="Nueva Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña"></ion-input>
+      <ion-input label="Nombre de usuario" label-placement="floating" type="username"  fill="solid" placeholder="Usuario" [(ngModel)]="username"></ion-input>
+      <br/>
+      <ion-input label="Nueva Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="newPassword"></ion-input>
       <br/>  
-      <ion-input label="Confirmar Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Confirmar Contraseña" ></ion-input>
+      <ion-input label="Confirmar Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Confirmar Contraseña" [(ngModel)]="confirmPassword"></ion-input>
       <br>
-      <div class="btn1">
-        <ion-button >Confirmar Contraseña</ion-button>
+      <div class="btn1 buttons">
+        <ion-button (click)="resetPassword()">Confirmar Contraseña</ion-button>
       </div>
     </div>
     <div class="btn2">
-      <ion-button fill="clear" href="/login">
+      <ion-button fill="clear" (click)="gotoLogin()">
         <ion-icon name="arrow-back-outline" ></ion-icon>
         Volver
       </ion-button>

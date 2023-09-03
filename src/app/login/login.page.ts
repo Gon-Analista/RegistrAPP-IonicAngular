@@ -25,7 +25,8 @@ export class LoginPage implements OnInit {
   constructor(private router: Router, private alertController: AlertController) {
     this.usersMap = new Map<string, UserModel>();
     this.usersMap.set('go.ulloa', new UserModel('Gonzalo', 'Ulloa', 'go.ulloa@duocuc.cl', 'PROFESOR', 'go.ulloa', 'ulloa123'));
-    this.usersMap.set('da.mallma', new UserModel('David', 'Mallma', 'da.mallma@duocuc.cl', 'ALUMNO', 'da.mallma', 'mallma123'));
+    this.usersMap.set('da.mallma', new UserModel('David', 'Mallma', 'da.m allma@duocuc.cl', 'ALUMNO', 'da.mallma', 'mallma123'));
+    
   }
 
   ngOnInit() {
@@ -65,7 +66,7 @@ export class LoginPage implements OnInit {
   gotoRest() {
     const navigationExtras: NavigationExtras = {
       state: {
-        usersMap: this.usersMap, // Pasa el mapa de usuarios a la página de restablecimiento
+        usersMap: this.usersMap,
       },
     };
     this.router.navigate(['/restablecer'], navigationExtras);
