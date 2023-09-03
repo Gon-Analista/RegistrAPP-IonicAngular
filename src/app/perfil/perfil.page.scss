@@ -27,74 +27,54 @@
     text-decoration: none;
   }
 
-
-/* Estilos personalizados para el encabezado */
 .title {
   font-size: 20px;
+  margin-left: 15px;
 }
 
 .perfil {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 
 .duoc-icon {
-  width: 50px; /* Ajusta el ancho según tus necesidades */
-  height: auto; /* Mantiene la proporción original */
-}
-
-/* Estilos para centrar el contenido debajo del encabezado */
-ion-content {
-  --ion-padding-top: 70px; /* Ajusta la distancia desde la parte superior según tus necesidades */
-}
-
-/* Evita cambios de color en el encabezado */
-ion-header {
-  --ion-background-color: transparent;
-}
-
-ion-toolbar {
-  --background: transparent;
-  --border-color: transparent;
-  --box-shadow: none;
-}
-
+  width: 80px;
+  height: auto; 
   
+}
+
   
 .avatar-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 16px; /* Añade un margen superior si es necesario */
-    margin-left: 40%;
-    
-    
+    margin-top: 16px;
+    margin-left: 28%;
+    width: 45%;
+    height: 45%;
 } 
-.avatar-image {
-     /* La imagen se ajustará automáticamente al ancho máximo del contenedor */
-   
-    width: 350%;
-    height: 130%;
-}
-  
   
 .contenido{
     margin-top: 5px;
     margin: 35px;
     margin-left: 15px;
     margin-right: 15px;
-    
-    
 }
 
 .texto{
     text-align: center;
 }
 
-.tabs{
-     
-    padding: auto;
-  
+
+.footer{
+  text-align: center;
+  margin-top: 80%;
 }
 
+ion-item ion-icon {
+  margin-right: 20px; 
+}
 
+#username {
+  margin-left: 5px;
+}

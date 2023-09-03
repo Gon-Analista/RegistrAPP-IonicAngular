@@ -1,24 +1,18 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title >
-  
     <ion-header>
-      <ion-toolbar color="light">
+      <ion-toolbar>
         <ion-buttons slot="start">
           <ion-img src="assets/img/duoc.jpg" class="duoc-icon"></ion-img>
         </ion-buttons>
-        <ion-title class="title">Inicio</ion-title>
+        <ion-title class="title ion-text-center">Inicio</ion-title>
         <ion-buttons slot="end">
           <ion-avatar class="perfil">
             <ion-img src="https://ionicframework.com/docs/img/demos/avatar.svg"></ion-img>
           </ion-avatar>
+          <p id="username">{{ userInfoReceived?.username }} </p>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    
-    
-    </ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -51,16 +45,13 @@
       </ion-avatar>
     </div>
   </div>
-  
- 
-  
+
   
   <div class="container texto">
     <br>
-    <ion-label class="texto">Bienvenido {{ userInfoReceived?.username }}</ion-label>
+    <ion-label class="texto" >Bienvenido {{ userInfoReceived?.name }} {{ userInfoReceived?.last_name }}</ion-label>
 </div>
-  
-
+  <br>
   <div class="contenido">
 
     <ion-item href="#">
@@ -85,16 +76,15 @@
 
     <ion-item href="#">
       <ion-icon name="log-out"></ion-icon>
-
-      <ion-label>Cerrar seccion</ion-label>
+      <ion-label>Cerrar sesion</ion-label>
     </ion-item>
   </div>
 
-  
-
-
-
 </div>
-  ``
+<footer>
+  <div >
+      <p class="footer">Privacy Policy - Duoc Uc</p>
+  </div>
+</footer>
 
 </ion-content>
