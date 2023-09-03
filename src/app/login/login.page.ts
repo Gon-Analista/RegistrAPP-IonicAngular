@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController } from '@ionic/angular';
 import { Router, NavigationExtras, RouterLinkWithHref } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
 import { UserModel } from 'src/app/models/UserModel';
@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     password: ''
   };
   
-  constructor(private router: Router){}
+  constructor(private router: Router, private alertController: AlertController){}
 
   ngOnInit() {
     this.userLoginModalRestart();
@@ -36,27 +36,35 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/perfil'])
   }
   
-  userLogin(userLoginInfo: IUserLogin): boolean{
-    for(let i = 0; i < this.listUser.length; i++){
-      console.log('Comparando:', this.listUser[i].username, userLoginInfo.username);
-      console.log('Contraseñas:', this.listUser[i].password, userLoginInfo.password);
-      if((this.listUser[i].username == userLoginInfo.username) && (this.listUser[i].password == userLoginInfo.password)){
-        console.log('User Loged...', this.userLoginModal.username, this.userLoginModal.password);
-        let userInfoSend: NavigationExtras = {
-          state: {
-            user: this.listUser[i]
-          }
+  async userLogin(userLoginInfo: IUserLogin): Promise<void> {
+    if (!userLoginInfo.username || !userLoginInfo.password) {
+      // Campos en blanco, muestra la alerta
+      await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
+    } else {
+      let userFound = false;
+      for (let i = 0; i < this.listUser.length; i++) {
+        if (
+          this.listUser[i].username === userLoginInfo.username &&
+          this.listUser[i].password === userLoginInfo.password
+        ) {
+          let userInfoSend: NavigationExtras = {
+            state: {
+              user: this.listUser[i]
+            }
+          };
+          this.router.navigate(['/perfil'], userInfoSend);
+          return;
+        } else {
+          userFound = true;
         }
 
         let sendInfo = this.router.navigate(['/perfil'], userInfoSend);
       }
-      else{
-        console.log('User not found');
+      if (userFound) {
+        await this.showAlert('Credenciales incorrectas', 'El nombre de usuario o la contraseña son incorrectos.');
       }
     }
     this.userLoginModalRestart();
-    return false;
-    
   }
 
   userLoginModalRestart(): void{
@@ -66,5 +74,13 @@ export class LoginPage implements OnInit {
   gotoRest(){
     this.router.navigate(['/restablecer'])
   }
-
+  async showAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
 }
