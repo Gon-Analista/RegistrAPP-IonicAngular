@@ -58,8 +58,9 @@ export class LoginPage implements OnInit {
           userFound = true;
         }
 
-        let sendInfo = this.router.navigate(['/perfil'], userInfoSend);
+        
       }
+
       if (userFound) {
         await this.showAlert('Credenciales incorrectas', 'El nombre de usuario o la contraseña son incorrectos.');
       }
