@@ -21,7 +21,7 @@ export class PerfilPage implements OnInit{
   userInfoReceived: UserModel | undefined;
   idUserHtmlRouterLink: any;
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
-  @ViewChild('buttons', { read: ElementRef }) buttons!: ElementRef;
+  @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
 
   constructor(private router: Router,private animationCtrl: AnimationController) {
@@ -35,9 +35,9 @@ export class PerfilPage implements OnInit{
       .duration(3000)
       .fromTo('transform', 'translateX(0px)', 'translateX(100px)')
       .fromTo('opacity', '0', '1'); 
-      console.log(this.animation)
       this.animation.play();
   }
+
 
   toggleContent(event: any) {
     const tab = event.detail.value;

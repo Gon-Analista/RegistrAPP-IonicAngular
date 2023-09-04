@@ -48,7 +48,6 @@ export class RestablecerPage implements OnInit {
         const user = this.usersMap.get(this.username);
         if (user) {
           user['password'] = this.newPassword;
-          // Actualiza el valor en el mapa
           this.usersMap.set(this.username, user);
           await this.showAlert('Contraseña actualizada', `La contraseña del usuario ${this.username} fue actualizada correctamente.`);
           this.router.navigate(['/login']);

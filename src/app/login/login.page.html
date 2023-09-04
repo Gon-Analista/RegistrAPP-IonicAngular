@@ -14,20 +14,22 @@
   <div>
     <br>
      <br>
+     <br>
     <div class="cabeza ion-padding">
       <div class="img1">
-        <ion-img  src="assets/img/app-logo.png" ></ion-img>
+        <ion-img #logAnim src="assets/img/logo-hd.png" ></ion-img>
       </div>
       <ion-input label="Nombre de usuario" label-placement="floating" fill="solid" placeholder="Usuario" [(ngModel)]="userLoginModal.username"></ion-input>
       <br/>  
       <ion-input label="Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="userLoginModal.password" ></ion-input>
+      <br>
+      <div class="btn1 ">
+        <ion-button expand="block" class="buttons" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
+      </div>
       <div class="cabeza2 btn2">
-        <ion-button class="buttons" fill="clear" color="primary" (click)="gotoRest()">
+        <ion-button class="buttons" fill="clear" color="secondary" (click)="gotoRest()">
           Olvidaste tu Contraseña?
         </ion-button>
-      </div>
-      <div class="btn1">
-        <ion-button class="buttons" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
       </div>
     </div>
   </div>

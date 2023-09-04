@@ -8,7 +8,7 @@
 
 .title {
     font-size: 20px;
-    margin-left: 16px;
+    margin-left: 10px;
 }
 
 .duoc-icon {
@@ -23,9 +23,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 16px;
-    margin-left: 28%;
-    width: 45%;
-    height: 45%;
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
 } 
   
 .contenido{
@@ -37,6 +37,7 @@
 
 .texto{
     text-align: center;
+    font-size: 17px;
 }
 
 
@@ -75,4 +76,28 @@ ion-item ion-icon {
   margin-left: 20%;
   width: 60%;
   height: 60%;
-} 
+}
+
+.border-hex-naranja {
+  border: 3px solid;
+  border-color: #fdbe34;
+}
+
+.subrayar {
+  display: inline-block;
+  border-bottom: 2px solid;
+  border-color: #fdbe34;
+  border-radius: 5px;
+}
+
+
+.bg-hex-azul {
+  background-color: #10316b;
+  background-image: linear-gradient(to bottom, #0e2f68, #4ab7e2);
+}
+
+.bg-hex-naranja {
+  background-color: #fdbe34;
+  background-image: linear-gradient(to right, #fcbb2e, #eece76);
+  border-radius: 3px;
+}
