@@ -8,8 +8,8 @@ import { Animation, AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'perfil.page.html',
-  styleUrls: ['perfil.page.scss'],
+  templateUrl: 'alumno.page.html',
+  styleUrls: ['alumno.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule],
 })
@@ -51,9 +51,6 @@ export class PerfilPage implements OnInit{
   }
   
   ngOnInit() {
-  }
-  gotoAsis(){
-    this.router.navigate(['/asistencia'])
   }
 }
 

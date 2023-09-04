@@ -56,6 +56,13 @@ ion-item ion-icon {
   transition: transform 0.7s; 
 }
 
+.boton-qr {
+  text-transform: capitalize;
+  font-size: 24px; 
+  --ion-icon-width: 36px; 
+  --ion-icon-height: 36px;
+}
+
 .buttons:hover {
   transform: scale(1.04); 
 }
@@ -82,6 +89,7 @@ ion-item ion-icon {
   border-color: #fdbe34;
   border-radius: 5px;
 }
+
 
 
 .bg-hex-azul {

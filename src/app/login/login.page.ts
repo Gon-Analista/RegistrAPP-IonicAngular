@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
     this.usersMap = new Map<string, UserModel>();
     this.usersMap.set('go.ulloa', new UserModel('Gonzalo', 'Ulloa', 'go.ulloa@duocuc.cl', 'PROFESOR', 'go.ulloa', 'ulloa123'));
     this.usersMap.set('da.mallma', new UserModel('David', 'Mallma', 'da.m allma@duocuc.cl', 'ALUMNO', 'da.mallma', 'mallma123'));
-    
   }
 
   ngAfterViewInit() {
@@ -60,18 +59,20 @@ export class LoginPage implements OnInit {
   async userLogin(userLoginInfo: IUserLogin): Promise<void> {
     const user = this.usersMap.get(userLoginInfo.username);
     if (!userLoginInfo.username || !userLoginInfo.password) {
-      // Campos en blanco, muestra la alerta
       await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
     } else if (user && user.password === userLoginInfo.password) {
-      console.log('User Loged...', user.username, user.password);
+      console.log('usuario ingresado:', user.username, user.password);
       const userInfoSend: NavigationExtras = {
         state: {
           user,
         },
       };
-      this.router.navigate(['/perfil'], userInfoSend);
+      if (user.role === 'PROFESOR') {
+        this.router.navigate(['/profesor'], userInfoSend);
+      } else if (user.role === 'ALUMNO') {
+        this.router.navigate(['/alumno'], userInfoSend);
+      };
     } else {
-      // Usuario no encontrado o contraseña incorrecta, muestra la alerta
       await this.showAlert('Credenciales incorrectas', 'El nombre de usuario o la contraseña son incorrectos.');
     }
 
