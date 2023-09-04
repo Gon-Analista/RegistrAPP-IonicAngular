@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
         { offset: 0.2, opacity: '0.1' },
         { offset: 0.4, opacity: '0.4' },
         { offset: 0.7,  opacity: '0.6' },
-        { offset: 0.9,  opacity: '0.9',transform: 'scale(1.15)' },
+        { offset: 0.9,  opacity: '0.9',transform: 'scale(1.1)' },
         { offset: 1,  opacity: '1', transform: 'scale(1)' },
       ]);
     this.animation.play();
