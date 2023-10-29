@@ -39,11 +39,11 @@ export class ProfesorPage implements OnInit {
       this.userInfoReceived = {
         name: params['name'],
         username: params['username'],
-        id: params['id'],
+        role: params['role'],
       };
-    
     });
   }
+  
 
    ngAfterViewInit() {
     this.animation = this.animationCtrl
@@ -68,15 +68,13 @@ export class ProfesorPage implements OnInit {
   }
   
   ngOnInit() {
-    console.log("id:",this.userInfoReceived.id);
-    this.getClases(this.userInfoReceived.id);
+    this.getClases();
   }
   
-  async getClases(profesorId: number) {
-    this.clases = await lastValueFrom(this.clasesService.getClasesList(profesorId));
+  async getClases() {
+    this.clases = await lastValueFrom(this.clasesService.getClasesList());
     console.log(this.clases);
   }
-  
   
 
 
