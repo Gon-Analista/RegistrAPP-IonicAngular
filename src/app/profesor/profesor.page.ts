@@ -77,9 +77,12 @@ export class ProfesorPage implements OnInit {
   }
   
 
+
   gotoAsis(){
     this.router.navigate(['/asistencia'])
   }
 }
+
+
 
 

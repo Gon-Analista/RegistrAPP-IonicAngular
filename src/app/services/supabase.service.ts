@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, map } from 'rxjs';
 import { UserModel } from '../models/IUserModel';	
 import { IUserLogin } from '../models/IUserLogin';
-
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 @Injectable({
   providedIn: 'root'
 })
@@ -61,5 +61,4 @@ export class ServiciosService {
 
 
   }
-
-//
+  

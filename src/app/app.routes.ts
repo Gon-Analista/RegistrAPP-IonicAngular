@@ -12,13 +12,12 @@ export const routes: Routes = [
     loadComponent: () => import('./alumno/alumno.page').then( m => m.PerfilPage),canActivate: [AuthGuard]
   },
   {
-
     path: 'restablecer',
     loadComponent: () => import('./restablecer/restablecer.page').then( m => m.RestablecerPage)
   },
   {
     path: 'profesor',
-    loadComponent: () => import('./profesor/profesor.page').then( m => m.ProfesorPage),canActivate: [AuthGuard]
+    loadComponent: () => import('./profesor/profesor.page').then( m => m.ProfesorPage),canActivate: [AuthGuard],data: { isProfesor: true } 
   },
   {
     path: '**',

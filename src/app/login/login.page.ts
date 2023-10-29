@@ -65,7 +65,7 @@ export class LoginPage implements OnInit {
       if (profesor && profesor.password === userLoginInfo.password) {
         console.log('Usuario ingresado:', profesor.username, profesor.password);
         // Almacena el token de autenticación en el localStorage.
-        localStorage.setItem('TOKEN', 'token'); // Reemplaza 'TOKEN_DEL_PROFESOR' con el token real.
+        localStorage.setItem('TOKEN_PROFESOR', 'token_del_profesor'); // Reemplaza 'TOKEN_DEL_PROFESOR' con el token real.
         this.router.navigate(['/profesor'], {
           queryParams: {
             name: profesor.name,
@@ -76,7 +76,7 @@ export class LoginPage implements OnInit {
       } else if (alumno && alumno.password === userLoginInfo.password) {
         console.log('Usuario ingresado:', alumno.username, alumno.password);
         // Almacena el token de autenticación en el localStorage.
-        localStorage.setItem('TOKEN', 'Token'); // Reemplaza 'TOKEN_DEL_ALUMNO' con el token real.
+        localStorage.setItem('TOKEN_ALUMNO', 'token_del_alumno'); // Reemplaza 'TOKEN_DEL_ALUMNO' con el token real.
         this.router.navigate(['/alumno'], {
           queryParams: {
             name: alumno.name,
