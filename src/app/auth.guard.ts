@@ -21,18 +21,4 @@ export class AuthGuard implements CanActivate {
   
 }
 
-export class AuthGuard2 implements CanActivate {
-  constructor(private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const token = localStorage.getItem('TOken'); // Verifica si el token de autenticación está presente en el localStorage.
-  
-    if (token) {
-      return true; // El usuario tiene acceso.
-    } else {
-      this.router.navigate(['/login']); // Redirige al inicio de sesión si el usuario no está autenticado.
-      return false; // El usuario no tiene acceso.
-    }
-  }
-  
-}
