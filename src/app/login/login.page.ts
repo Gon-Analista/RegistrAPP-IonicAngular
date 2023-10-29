@@ -63,14 +63,18 @@ export class LoginPage implements OnInit {
       await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
     } else {
       if (profesor && profesor.password === userLoginInfo.password) {
+
         console.log('Usuario ingresado:', profesor.username, profesor.password);
         // Almacena el token de autenticación en el localStorage.
         localStorage.setItem('TOKEN', 'token'); // Reemplaza 'TOKEN_DEL_PROFESOR' con el token real.
+
+        console.log('Usuario ingresado:', profesor.username, profesor.password, profesor.profesor_id);
+
         this.router.navigate(['/profesor'], {
           queryParams: {
             name: profesor.name,
             username: profesor.username,
-            role: profesor.role,
+            id: profesor.profesor_id,
           }
         });
       } else if (alumno && alumno.password === userLoginInfo.password) {
