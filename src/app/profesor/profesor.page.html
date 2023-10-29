@@ -70,34 +70,28 @@
   </div>
 </div>
 <div *ngIf="showAsistenciaContent">
-  <div class="container">
-    <div class="cabeza ion-padding">
-    <ion-img class="QR" alt="QR" src="assets/img/QR.png" />
-    </div>
-  </div>
-  <br>
-  <br>
-  <div class="container">
-    <div class="cabeza ion-padding ion-align-items-center ion-text-center">
-      <ion-button class="boton-qr buttons">
-        <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-        Generar QR
-      </ion-button>
-    </div>
-  </div>
-  <br>
-  <div class="container">
-    <div class="cabeza ion-padding ion-align-items-center ion-text-center">
-      <ion-button class="boton-qr2 buttons">
-        <ion-icon slot="start" name="videocam-outline"></ion-icon>
-        Proyectar QR
-      </ion-button>
-    </div>
-  </div>
-</div>
+  <ion-list>
+    <ion-item-sliding *ngFor="let clase of clases">
+      <ion-item >
+      <ion-label>
+          
+        <div class="ion-text-center">{{ clase.asignaturas.nombre_asignatura }}</div>
+        <br>
+        <p>Fecha: {{ clase.fecha }}</p>
+        <p>Hora de inicio: {{ clase.hora_inicio }}</p>
+        <p>Hora final: {{ clase.hora_final }}</p>
+
+      </ion-label>
+      
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="medium">
+          <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 <footer class="footer ion-text-center">
       <p>Privacy Policy - Duoc Uc</p>
 </footer>
-
-</ion-content>
 

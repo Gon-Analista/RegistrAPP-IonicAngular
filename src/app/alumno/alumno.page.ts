@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserModel } from 'src/app/models/UserModel';
+import { UserModel } from 'src/app/models/IUserModel';
 import { Animation, AnimationController } from '@ionic/angular';
 
 @Component({
