@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, Params} from '@angular/router';
 import { UserModel } from 'src/app/models/UserModel';
 import { Animation, AnimationController } from '@ionic/angular';
 
@@ -17,16 +17,22 @@ export class ProfesorPage implements OnInit {
 
   showPerfilContent: boolean = true;
   showAsistenciaContent: boolean = false;
-
-  userInfoReceived: UserModel | undefined;
+  userInfoReceived: any;
   idUserHtmlRouterLink: any;
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
 
-  constructor(private router: Router,private animationCtrl: AnimationController) {
-    this.userInfoReceived = this.router.getCurrentNavigation()?.extras.state?.['user'];
-   }
+  constructor(private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+    this.route.queryParams.subscribe((params: Params) => {
+      this.userInfoReceived = {
+        name: params['name'],
+        username: params['username'],
+        role: params['role'],
+      };
+    });
+  }
+  
 
    ngAfterViewInit() {
     this.animation = this.animationCtrl

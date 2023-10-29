@@ -1,13 +1,14 @@
-export class UserModel {
+export interface UserModel {
 
-    constructor(
-        public name: string,
-        public last_name: string,
-        public email: string,
-        public role: string,
-        public username: string,
-        public password: string,
-    ) {
-    }
+
+        name: string,
+        last_name: string,
+        email: string,
+        username: string,
+        password: string,
+        role: string,
+        estado: boolean,
+        id: string,
+
 
 }

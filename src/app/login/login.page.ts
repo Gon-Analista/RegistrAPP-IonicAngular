@@ -6,7 +6,9 @@ import { Router, NavigationExtras, RouterLinkWithHref } from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
 import { UserModel } from 'src/app/models/UserModel';
 import { RouterModule } from '@angular/router';
+import { ServiciosService } from '../services/supabase.service'; 
 import { Animation, AnimationController } from '@ionic/angular';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,6 @@ import { Animation, AnimationController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, RouterLinkWithHref, FormsModule, RouterModule]
 })
 export class LoginPage implements OnInit {
-  usersMap: Map<string, UserModel>;
   @ViewChild('logAnim', { read: ElementRef }) logAnim!: ElementRef;
   private animation!: Animation;
 
@@ -25,10 +26,8 @@ export class LoginPage implements OnInit {
     password: ''
   };
 
-  constructor(private router: Router, private alertController: AlertController,private animationCtrl: AnimationController) {
-    this.usersMap = new Map<string, UserModel>();
-    this.usersMap.set('go.ulloa', new UserModel('Gonzalo', 'Ulloa', 'go.ulloa@duocuc.cl', 'PROFESOR', 'go.ulloa', 'ulloa123'));
-    this.usersMap.set('da.mallma', new UserModel('David', 'Mallma', 'da.m allma@duocuc.cl', 'ALUMNO', 'da.mallma', 'mallma123'));
+  constructor(private router: Router, private alertController: AlertController,private animationCtrl: AnimationController, private servicio: ServiciosService) {
+   
   }
 
   ngAfterViewInit() {
@@ -57,27 +56,39 @@ export class LoginPage implements OnInit {
   }
 
   async userLogin(userLoginInfo: IUserLogin): Promise<void> {
-    const user = this.usersMap.get(userLoginInfo.username);
+    const profesor = await lastValueFrom(this.servicio.getLoginProfesores(userLoginInfo));
+    const alumno = await lastValueFrom(this.servicio.getLoginAlumnos(userLoginInfo));
+
     if (!userLoginInfo.username || !userLoginInfo.password) {
       await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
-    } else if (user && user.password === userLoginInfo.password) {
-      console.log('usuario ingresado:', user.username, user.password);
-      const userInfoSend: NavigationExtras = {
-        state: {
-          user,
-        },
-      };
-      if (user.role === 'PROFESOR') {
-        this.router.navigate(['/profesor'], userInfoSend);
-      } else if (user.role === 'ALUMNO') {
-        this.router.navigate(['/alumno'], userInfoSend);
-      };
     } else {
-      await this.showAlert('Credenciales incorrectas', 'El nombre de usuario o la contraseña son incorrectos.');
+      if (profesor && profesor.password === userLoginInfo.password) {
+        console.log('Usuario ingresado:', profesor.username, profesor.password);
+        this.router.navigate(['/profesor'], {
+          queryParams: {
+            name: profesor.name,
+            username: profesor.username,
+            role: profesor.role,
+          }
+        })
+      } else if (alumno && alumno.password === userLoginInfo.password) {
+        console.log('Usuario ingresado:', alumno.username, alumno.password);
+        this.router.navigate(['/alumno'], {
+          queryParams: {
+            name: alumno.name,
+            username: alumno.username,
+            role: alumno.role,
+          }
+        })
+      } else {
+        await this.showAlert('Credenciales incorrectas', 'El nombre de usuario o la contraseña son incorrectos.');
+      }
     }
 
     this.userLoginModalRestart();
-  }
+}
+
+
 
   userLoginModalRestart(): void {
     this.userLoginModal.username = '';
@@ -87,7 +98,7 @@ export class LoginPage implements OnInit {
   gotoRest() {
     const navigationExtras: NavigationExtras = {
       state: {
-        usersMap: this.usersMap,
+        usersMap: this.userLoginModal
       },
     };
     this.router.navigate(['/restablecer'], navigationExtras);
