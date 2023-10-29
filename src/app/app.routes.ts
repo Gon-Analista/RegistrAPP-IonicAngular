@@ -9,9 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'alumno',
-
     loadComponent: () => import('./alumno/alumno.page').then( m => m.PerfilPage),canActivate: [AuthGuard]
-
   },
   {
 
@@ -20,7 +18,6 @@ export const routes: Routes = [
   },
   {
     path: 'profesor',
-
     loadComponent: () => import('./profesor/profesor.page').then( m => m.ProfesorPage),canActivate: [AuthGuard]
   },
   {
