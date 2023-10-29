@@ -8,28 +8,30 @@
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <div class="duoc-icon">
     <ion-img src="assets/img/duoc.jpg" ></ion-img>
   </div>
   <div>
     <br>
      <br>
+     <br>
     <div class="cabeza ion-padding">
       <div class="img1">
-        <ion-img src="assets/img/app-logo.png" ></ion-img>
+        <ion-img #logAnim src="assets/img/logo-hd.png" ></ion-img>
       </div>
       <ion-input label="Nombre de usuario" label-placement="floating" fill="solid" placeholder="Usuario" [(ngModel)]="userLoginModal.username"></ion-input>
       <br/>  
-      <ion-input label="Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="userLoginModal.password"></ion-input>
-      <div class="cabeza2">
-        <a href="/restablecer">Olvidaste tu Contraseña?</a>
+      <ion-input label="Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="userLoginModal.password" ></ion-input>
+      <br>
+      <div class="btn1 ">
+        <ion-button expand="block" class="buttons" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
       </div>
-      <div class="btn1">
-        <ion-button (click)="userLogin(userLoginModal)">Ingresar</ion-button>
+      <div class="cabeza2 btn2">
+        <ion-button class="buttons" fill="clear" color="secondary" (click)="gotoRest()">
+          Olvidaste tu Contraseña?
+        </ion-button>
       </div>
-    </div>  
-
+    </div>
   </div>
   <footer>
     <div >

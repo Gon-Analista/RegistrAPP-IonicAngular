@@ -1,0 +1,118 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-align-items-center">
+    <ion-buttons slot="start">
+      <ion-img src="assets/img/duoc.jpg" class="duoc-icon"></ion-img>
+    </ion-buttons>
+    <ion-title class="title ion-text-center">Alumno</ion-title>
+    <ion-buttons slot="end">
+      <ion-avatar class="perfil">
+        <ion-img src="assets/img/alumno.png"></ion-img>
+      </ion-avatar>
+      <p class="username">{{ userInfoReceived?.username}}</p>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<div class="container">
+  <div class="barra">
+    <ion-segment value="perfil" (ionChange)="toggleContent($event)">
+      <ion-segment-button class="buttons" value="asistencia">
+        <ion-label>Asistencia</ion-label>
+      </ion-segment-button>
+      <ion-segment-button class="buttons" value="perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</div>
+
+
+<div *ngIf="showPerfilContent">
+
+  <div class="container">
+    <div class="cabeza ion-padding">
+      <ion-avatar class="avatar-container border-hex-naranja">
+        <img alt="Silhouette of a person's head" src="assets/img/alumno.png" class="avatar-image" />
+      </ion-avatar>
+    </div>
+  </div>
+  <div class="container texto">
+    <br>
+    <ion-label #label2 class="texto" >Bienvenido {{ userInfoReceived?.name }} </ion-label>
+</div>
+<br>
+<br>
+  <div class="contenido">
+    <ion-item class="buttons" href="#">
+      <ion-icon name="shield"></ion-icon>
+      <ion-label class="le">Privacidad</ion-label>
+    </ion-item>
+    <ion-item class="buttons" href="#">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <ion-label>Mensajes</ion-label>
+    </ion-item>
+    <ion-item class="buttons" href="#">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-label>Alertas</ion-label>
+    </ion-item>
+    <ion-item class="buttons" href="#">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Modificar perfil</ion-label>
+    </ion-item>
+    <ion-item class="buttons" href="#">
+      <ion-icon name="log-out"></ion-icon>
+      <ion-label>Cerrar sesion</ion-label>
+    </ion-item>
+  </div>
+</div>
+
+<div *ngIf="showAsistenciaContent">
+  <div class="container">
+    <div class="cabeza ion-padding">
+    <ion-img class="QR" alt="QR" src="assets/img/QR.png" />
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="cabeza ion-padding ion-align-items-center ion-text-center">
+      <ion-button class="boton-qr buttons">
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Escanear QR
+      </ion-button>
+    </div>
+  </div>
+  <br>
+  <div class="contenido">
+    <ion-list>
+      <ion-item>
+        <ion-label>Programacion Movil</ion-label>
+        <ion-badge color="medium">100%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Portafolio</ion-label>
+        <ion-badge color="danger">20%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Base de Datos</ion-label>
+        <ion-badge color="warning">75%</ion-badge>
+      </ion-item>
+      <ion-item>
+        <ion-label>Arquitectura</ion-label>
+        <ion-badge color="medium">80%</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<footer class="footer ion-text-center">
+      <p>Privacy Policy - Duoc Uc</p>
+</footer>
+
+</ion-content>
