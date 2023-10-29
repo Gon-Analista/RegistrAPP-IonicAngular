@@ -29,9 +29,9 @@ export class ServiciosService {
   }
   
   getLoginProfesores(UserLogin : IUserLogin): Observable<UserModel> {
-    return this.http.get<UserModel[]>(this.URL_API +'profesores?select=name,username,password,role&username=eq.' + UserLogin.username + '&password=eq.' + UserLogin.password, { headers: this.header, responseType: 'json' }).pipe(
+    return this.http.get<UserModel[]>(this.URL_API +'profesores?select=profesor_id,name,username,password,role&username=eq.' + UserLogin.username + '&password=eq.' + UserLogin.password, { headers: this.header, responseType: 'json' }).pipe(
       map((userInfo) => {
-        console.log("userinfo:",userInfo);
+        console.log("userinfo profesor:",userInfo);
         return userInfo[0];
       }));
     }
@@ -39,14 +39,10 @@ export class ServiciosService {
   getLoginAlumnos(UserLogin : IUserLogin): Observable<UserModel> {
       return this.http.get<UserModel[]>(this.URL_API +'alumnos?select=name,username,password,role&username=eq.' + UserLogin.username + '&password=eq.' + UserLogin.password, { headers: this.header, responseType: 'json' }).pipe(
         map((userInfo) => {
-          console.log("userinfo:",userInfo);
+          console.log("userinfo alumno:",userInfo);
           return userInfo[0];
         }));
       }
-
-  getSecciones(id_usuario:string): Observable<any> {
-    return this.http.get<any[]>(this.URL_API + 'Asignacion?select=id_seccion(*)&id_usuario=eq.'+id_usuario, { headers: this.header, responseType: 'json' })
-  }
 
 
 
