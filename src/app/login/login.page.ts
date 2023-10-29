@@ -63,12 +63,12 @@ export class LoginPage implements OnInit {
       await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
     } else {
       if (profesor && profesor.password === userLoginInfo.password) {
-        console.log('Usuario ingresado:', profesor.username, profesor.password);
+        console.log('Usuario ingresado:', profesor.username, profesor.password, profesor.profesor_id);
         this.router.navigate(['/profesor'], {
           queryParams: {
             name: profesor.name,
             username: profesor.username,
-            role: profesor.role,
+            id: profesor.profesor_id,
           }
         })
       } else if (alumno && alumno.password === userLoginInfo.password) {
