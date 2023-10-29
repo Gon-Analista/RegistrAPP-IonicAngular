@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { Router} from '@angular/router';
 import { IUserLogin } from '../models/IUserLogin';
-import { UserModel } from 'src/app/models/UserModel';
+import { UserModel } from 'src/app/models/IUserModel';
 
 @Component({
   selector: 'app-restablecer',

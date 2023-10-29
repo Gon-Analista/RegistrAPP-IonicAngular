@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, Params} from '@angular/router';
-import { UserModel } from 'src/app/models/UserModel';
+import { ClasesService } from '../services/clases.service';
+import { IClases } from 'src/app/models/IClases';
+import { lastValueFrom, throwError } from 'rxjs';
+import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
 
 @Component({
@@ -22,8 +25,16 @@ export class ProfesorPage implements OnInit {
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
+  clases: any;
+  clase: IClases = {
+    clase_id: 0,
+    asignatura_id: 0,
+    fecha: new Date(),
+    hora_inicio: { hours: 0, minutes: 0 },
+    hora_final: { hours: 0, minutes: 0 }
+  };
 
-  constructor(private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -57,7 +68,15 @@ export class ProfesorPage implements OnInit {
   }
   
   ngOnInit() {
+    this.getClases();
   }
+  
+  async getClases() {
+    this.clases = await lastValueFrom(this.clasesService.getClasesList());
+    console.log(this.clases);
+  }
+  
+
   gotoAsis(){
     this.router.navigate(['/asistencia'])
   }
