@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { IClases } from '../models/IClases';
+import { IAsistencia } from '../models/IAsistencia';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +25,10 @@ export class ClasesService {
     
     
 
-  insertarClases(clases: IClases): Observable<any>{
-    return this.http.post<any>(this.supaurl+'clases',clases,{headers: this.supaheader, observe: 'response'});
-  }
+  crearAsistencia(asistencia: IAsistencia): Observable<any> {
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      return this.http.post(`${this.supaurl}/asistencias`, asistencia, { headers:this.supaheader });
+    }
 
   updateClases(clases: any): Observable<HttpErrorResponse | any>{
     return this.http.patch<any>(this.supaurl+'clases?clase_id=eq.'+clases.id,clases,{headers: this.supaheader, observe: 'response'});
