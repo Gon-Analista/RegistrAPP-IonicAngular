@@ -81,13 +81,13 @@ export class PerfilPage implements OnInit{
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Procesando...',
-      duration: 2000, // Duración en milisegundos (ajusta según tus necesidades)
+      duration: 2000, 
       translucent: true,
     });
   
     await loading.present();
   
-    // Después de la duración especificada, cierra el icono de carga
+  
     loading.onDidDismiss().then(() => {
       console.log('Carga completa');
     });
