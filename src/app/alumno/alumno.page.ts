@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserModel } from 'src/app/models/IUserModel';
+import { UserModelAlumno } from 'src/app/models/IUserModelAlumno';
+import { AsistenciaService } from '../services/asistencia.service';
 import { Animation, AnimationController } from '@ionic/angular';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -21,16 +23,20 @@ export class PerfilPage implements OnInit{
   idUserHtmlRouterLink: any;
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
+  clases: any;
+  nuevoEstado: any;
   
   private animation!: Animation;
-  constructor(private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
         username: params['username'],
-        role: params['role'],
+        id : params['id'],
       };
+      console.log("user info:",this.userInfoReceived);
     });
+    
   }
 
    ngAfterViewInit() {
@@ -56,6 +62,18 @@ export class PerfilPage implements OnInit{
   }
   
   ngOnInit() {
+    this.getAsist(this.userInfoReceived.id);
+  }
+  
+  async getAsist(alumnoId: number) {
+    this.clases = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
+    console.log("asistencia:",this.clases);
+  }
+
+  async updateClaseEstado(clase_id : number) {
+    const alumno_id = this.userInfoReceived.id;
+    const nuevoEstadoT = true;
+    await lastValueFrom(this.AsistenciaService.updateClaseEstado(alumno_id,clase_id,nuevoEstadoT));
   }
 }
 
