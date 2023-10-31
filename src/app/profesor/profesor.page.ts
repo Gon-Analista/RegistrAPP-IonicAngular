@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, Params} from '@angular/router';
 import { ClasesService } from '../services/clases.service';
-import { IClases } from 'src/app/models/IClases';
+import { IAsistencia } from 'src/app/models/IAsistencia';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
@@ -22,16 +22,14 @@ export class ProfesorPage implements OnInit {
   showAsistenciaContent: boolean = false;
   userInfoReceived: any;
   idUserHtmlRouterLink: any;
+  name!: string;
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
   clases: any;
-  clase: IClases = {
+  asistencia: IAsistencia = {
     clase_id: 0,
-    asignatura_id: 0,
-    fecha: new Date(),
-    hora_inicio: { hours: 0, minutes: 0 },
-    hora_final: { hours: 0, minutes: 0 }
+    alumnos_id: 0
   };
 
   constructor(private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
@@ -68,12 +66,22 @@ export class ProfesorPage implements OnInit {
   }
   
   ngOnInit() {
-    this.getClases();
+    this.getClases(this.userInfoReceived.id);
   }
   
-  async getClases() {
-    this.clases = await lastValueFrom(this.clasesService.getClasesList());
-    console.log(this.clases);
+  async getClases(profesorId: number) {
+    this.clases = await lastValueFrom(this.clasesService.getClasesList(profesorId));
+  }
+
+  async crearAsistencia(clase: any) {
+    const asistencia: IAsistencia = {
+      clase_id: clase.clase_id ,
+      alumnos_id: 4
+    };
+    console.log("asistencia",asistencia);
+    console.log("clase",clase);
+    console.log("id",clase.clase_id);
+    const response = await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
   }
   
 
