@@ -7,7 +7,7 @@ import { UserModelAlumno } from 'src/app/models/IUserModelAlumno';
 import { AsistenciaService } from '../services/asistencia.service';
 import { Animation, AnimationController } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
-
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'alumno.page.html',
@@ -27,7 +27,7 @@ export class PerfilPage implements OnInit{
   nuevoEstado: any;
   
   private animation!: Animation;
-  constructor(private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController,private loadingController: LoadingController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -68,12 +68,31 @@ export class PerfilPage implements OnInit{
   async getAsist(alumnoId: number) {
     this.clases = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
     console.log("asistencia:",this.clases);
+    
   }
 
   async updateClaseEstado(clase_id : number) {
     const alumno_id = this.userInfoReceived.id;
     const nuevoEstadoT = true;
     await lastValueFrom(this.AsistenciaService.updateClaseEstado(alumno_id,clase_id,nuevoEstadoT));
+    this.presentLoading();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Procesando...',
+      duration: 2000, // Duración en milisegundos (ajusta según tus necesidades)
+      translucent: true,
+    });
+  
+    await loading.present();
+  
+    // Después de la duración especificada, cierra el icono de carga
+    loading.onDidDismiss().then(() => {
+      console.log('Carga completa');
+    });
+  }
+  
+
 }
 

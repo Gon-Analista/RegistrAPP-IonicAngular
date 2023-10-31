@@ -8,6 +8,7 @@ import { IAsistencia } from 'src/app/models/IAsistencia';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profesor',
@@ -31,8 +32,9 @@ export class ProfesorPage implements OnInit {
     seccion_id: 0,
     alumno_id: 0,
   };
+  
 
-  constructor(private clasesService: ClasesService  , private alertController: AlertController,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private clasesService: ClasesService  , private alertController: AlertController,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController,private loadingController: LoadingController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -76,7 +78,7 @@ export class ProfesorPage implements OnInit {
 
   async crearAsistencia(clase: any) {
     const listaAlumnos: any[] = await this.getAlumnosList();
-    
+    this.presentLoading();
     for (const alumno of listaAlumnos) {
       const asistencia: IAsistencia = {
         clase_id: clase.clase_id,
@@ -86,19 +88,28 @@ export class ProfesorPage implements OnInit {
       await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
     }
   
-    this.presentAlert(); 
+    
     
   }
   
   
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Asistencia Creada',
-      message: 'La asistencia se ha creado con éxito.',
-      buttons: ['OK']
+ 
+  
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Procesando...',
+      duration: 2000, // Duración en milisegundos (ajusta según tus necesidades)
+      translucent: true,
     });
-    await alert.present();
+  
+    await loading.present();
+  
+    // Después de la duración especificada, cierra el icono de carga
+    loading.onDidDismiss().then(() => {
+      console.log('Carga completa');
+    });
   }
+  
 
 
   async getAlumnosList(): Promise<any[]> {
