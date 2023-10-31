@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable} from 'rxjs';
 import { IAsistencia } from '../models/IAsistencia';
+import { IClases } from '../models/IClases';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,13 @@ export class ClasesService {
   crearAsistencia(asistencia: IAsistencia): Observable<any> {
       return this.http.post(`${this.supaurl}/asistencias`, asistencia, { headers:this.supaheader });
     }
+
+
+    delClase(claseId: number): Observable<any> {
+      return this.http.delete<any>(`${this.supaurl}clases?clase_id=eq.${claseId}`, { headers: this.supaheader });
+    }
+    
+    
 
   
 

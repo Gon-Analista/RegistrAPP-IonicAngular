@@ -26,6 +26,11 @@ export class LoginPage implements OnInit {
     password: ''
   };
 
+  logout() {
+    localStorage.removeItem('TOKEN_ALUMNO');
+    localStorage.removeItem('TOKEN_PROFESOR');
+  }
+
   constructor(private router: Router, private alertController: AlertController,private animationCtrl: AnimationController, private servicio: ServiciosService) {
    
   }
@@ -49,6 +54,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.userLoginModalRestart();
+    this.logout()
   }
 
   gotoPerfil() {
@@ -65,7 +71,7 @@ export class LoginPage implements OnInit {
       if (profesor && profesor.password === userLoginInfo.password) {
         console.log('Usuario ingresado:', profesor.username, profesor.password, profesor.profesor_id);
         // Almacena el token de autenticación en el localStorage.
-        localStorage.setItem('TOKEN_PROFESOR', 'token_del_profesor'); // Reemplaza 'TOKEN_DEL_PROFESOR' con el token real.
+        localStorage.setItem('TOKEN_PROFESOR', 'token_del_profesor');
         this.router.navigate(['/profesor'], {
           queryParams: {
             name: profesor.name,
@@ -76,7 +82,7 @@ export class LoginPage implements OnInit {
       } else if (alumno && alumno.password === userLoginInfo.password) {
         console.log('Usuario ingresado:', alumno.username, alumno.password);
         // Almacena el token de autenticación en el localStorage.
-        localStorage.setItem('TOKEN_ALUMNO', 'token_del_alumno'); // Reemplaza 'TOKEN_DEL_ALUMNO' con el token real.
+        localStorage.setItem('TOKEN_ALUMNO', 'token_del_alumno');
         this.router.navigate(['/alumno'], {
           queryParams: {
             name: alumno.name,
@@ -93,8 +99,6 @@ export class LoginPage implements OnInit {
     this.userLoginModalRestart();
   }
   
-
-
   userLoginModalRestart(): void {
     this.userLoginModal.username = '';
     this.userLoginModal.password = '';

@@ -1,10 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, Params} from '@angular/router';
 import { ClasesService } from '../services/clases.service';
 import { IAsistencia } from 'src/app/models/IAsistencia';
+import { IClases } from 'src/app/models/IClases';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
@@ -32,7 +33,13 @@ export class ProfesorPage implements OnInit {
     alumno_id: 0,
   };
 
-  constructor(private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+
+  logout() {
+    localStorage.removeItem('TOKEN_PROFESOR');
+    this.router.navigate(['/login']); 
+  }
+
+  constructor(private alertController: AlertController, private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -90,6 +97,47 @@ export class ProfesorPage implements OnInit {
     const alumnos = await lastValueFrom(this.clasesService.getAlumnosList());
     return alumnos;
   }
+
+
+  async deleteClase(clase: any): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Finalizar',
+      subHeader: clase.asignaturas.nombre_asignatura,
+      message: '¿Está seguro de finalizar esta Clase?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Alert canceled');
+          },
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: async () => {
+            try {
+            const response = await this.clasesService.delClase(clase.clase_id).toPromise();
+            console.log("clase id:", clase.clase_id);
+            console.log(response);
+            // Eliminar la clase después de la solicitud DELETE exitosa
+            const index = this.clases.indexOf(clase);
+            if (index !== -1) {
+              this.clases.splice(index, 1);
+            }
+            } catch (err: any) {
+              console.log(err);
+              if (err.status === 400) {
+                console.log('Error 400');
+              }
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+  
 
   
   

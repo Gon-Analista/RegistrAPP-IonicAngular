@@ -8,14 +8,12 @@ import { Observable } from 'rxjs';
 
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
-
+  
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const isProfesor = route.data['isProfesor'];
     const token = isProfesor ? localStorage.getItem('TOKEN_PROFESOR') : localStorage.getItem('TOKEN_ALUMNO');
 
     if (token) {
-      localStorage.removeItem('TOKEN_PROFESOR'); // El usuario pierde el  acceso.
-      localStorage.removeItem('TOKEN_ALUMNO'); // El usuario pierde el  acceso.
       return true;
      
     } else {

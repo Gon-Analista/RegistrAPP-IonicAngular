@@ -25,6 +25,11 @@ export class PerfilPage implements OnInit{
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   clases: any;
   nuevoEstado: any;
+
+  logout() {
+    localStorage.removeItem('TOKEN_ALUMNO');
+    this.router.navigate(['/login']); 
+  }
   
   private animation!: Animation;
   constructor(private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {

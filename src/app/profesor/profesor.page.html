@@ -65,7 +65,7 @@
     </ion-item>
     <ion-item class="buttons" href="#">
       <ion-icon name="log-out"></ion-icon>
-      <ion-label >Cerrar sesion</ion-label>
+      <ion-label (click)="logout()">Cerrar sesion</ion-label>
     </ion-item>
   </div>
 </div>
@@ -86,6 +86,14 @@
         <ion-item-options>
           <ion-item-option color="medium" (click)="crearAsistencia(clase)">
             <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="start">
+          <ion-item-option color="danger" (click)="deleteClase(clase)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="warning">
+            <ion-icon slot="icon-only" name="document-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>

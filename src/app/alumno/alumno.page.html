@@ -68,7 +68,7 @@
     </ion-item>
     <ion-item class="buttons" href="#">
       <ion-icon name="log-out"></ion-icon>
-      <ion-label>Cerrar sesion</ion-label>
+      <ion-label (click)="logout()">Cerrar sesion</ion-label>
     </ion-item>
   </div>
 </div>
@@ -99,26 +99,6 @@
     </ng-template>
   </ion-list>
   <br>
-  <div class="contenido">
-    <ion-list>
-      <ion-item>
-        <ion-label>Programacion Movil</ion-label>
-        <ion-badge color="medium">100%</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Portafolio</ion-label>
-        <ion-badge color="danger">20%</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Base de Datos</ion-label>
-        <ion-badge color="warning">75%</ion-badge>
-      </ion-item>
-      <ion-item>
-        <ion-label>Arquitectura</ion-label>
-        <ion-badge color="medium">80%</ion-badge>
-      </ion-item>
-    </ion-list>
-  </div>
 </div>
 <footer class="footer ion-text-center">
       <p>Privacy Policy - Duoc Uc</p>
