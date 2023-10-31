@@ -78,8 +78,9 @@
             <div class="ion-text-center">{{ clase.asignaturas?.nombre_asignatura }}</div>
             <br>
             <p>Fecha: {{ clase.fecha }}</p>
-            <p>Hora de inicio: {{ clase.hora_inicio }}</p>
-            <p>Hora final: {{ clase.hora_final }}</p>
+            <p>Sala: {{ clase.sala  }}</p>
+            <p>Seccion: {{ clase.secciones.nombre_seccion  }}</p>
+            <p>Profesor Encargado: {{ clase.profesor.name + ' ' + clase.profesor.last_name }}</p>
           </ion-label>
         </ion-item>
         <ion-item-options>

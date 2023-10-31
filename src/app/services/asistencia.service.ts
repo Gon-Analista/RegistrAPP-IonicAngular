@@ -6,7 +6,7 @@ import { IAsistencia } from '../models/IAsistencia';
 @Injectable({
   providedIn: 'root'
 })
-export class ClasesService {
+export class AsistenciaService {
 
   supaurl = 'https://pluhkyjkzcqesuwnvwmh.supabase.co/rest/v1/';
 
@@ -15,35 +15,23 @@ export class ClasesService {
 
   supaheader = new HttpHeaders()
     .set('apikey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBsdWhreWpremNxZXN1d252d21oIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc4OTk0MjQsImV4cCI6MjAxMzQ3NTQyNH0.zg4cfELCrPGkXCeGWp8O7tOQoOSqojtT4r5GMjGE2dU')
+
+
+
   
-  getClasesList(profesorId: number): Observable<any> {
+  getAsistenciaList(alumnoId: number): Observable<any> {
       return this.http.get<any>(
-        `${this.supaurl}clases?profesor_id=eq.${profesorId}&select=*,asignaturas(nombre_asignatura),secciones(nombre_seccion,seccion_id),profesor:profesor_id(name,last_name)`,
+        `${this.supaurl}asistencias?alumno_id=eq.${alumnoId}&select=*,clases(fecha,sala,asignatura_id(nombre_asignatura)),secciones:seccion_id(nombre_seccion,sede_id(nombre_sede))`,
         { headers: this.supaheader }
       );
     }
 
-  getAlumnosList(): Observable<any> {
-      return this.http.get<any>(
-        `${this.supaurl}alumnos?select=alumno_id`,
-        { headers: this.supaheader }
-      );
-    }
-
-  crearAsistencia(asistencia: IAsistencia): Observable<any> {
-      return this.http.post(`${this.supaurl}/asistencias`, asistencia, { headers:this.supaheader });
-    }
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  updateClaseEstado(alumno_id: number, clase_id: number, nuevoEstado: boolean): Observable<any> {
+    const url = `${this.supaurl}asistencias?alumno_id=eq.${alumno_id}&clase_id=eq.${clase_id}`;
+    const body = {
+      estado: nuevoEstado
+    };
+    return this.http.patch(url, body, { headers: this.supaheader });
+  }
 }
+

@@ -22,14 +22,14 @@ export class ProfesorPage implements OnInit {
   showAsistenciaContent: boolean = false;
   userInfoReceived: any;
   idUserHtmlRouterLink: any;
-  name!: string;
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
   clases: any;
   asistencia: IAsistencia = {
     clase_id: 0,
-    alumnos_id: 0
+    seccion_id: 0,
+    alumno_id: 0,
   };
 
   constructor(private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
@@ -39,7 +39,7 @@ export class ProfesorPage implements OnInit {
         username: params['username'],
         id: params['id'],
       };
-    
+      console.log("user info:",this.userInfoReceived);
     });
   }
 
@@ -70,19 +70,27 @@ export class ProfesorPage implements OnInit {
   }
   
   async getClases(profesorId: number) {
+    console.log("profesorId",profesorId);
     this.clases = await lastValueFrom(this.clasesService.getClasesList(profesorId));
   }
 
   async crearAsistencia(clase: any) {
-    const asistencia: IAsistencia = {
-      clase_id: clase.clase_id ,
-      alumnos_id: 4
-    };
-    console.log("asistencia",asistencia);
-    console.log("clase",clase);
-    console.log("id",clase.clase_id);
-    const response = await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
+    const listaAlumnos: any[] = await this.getAlumnosList();
+    for (const alumno of listaAlumnos) {
+      const asistencia: IAsistencia = {
+        clase_id: clase.clase_id,
+        seccion_id: clase.seccion_id,
+        alumno_id: alumno.alumno_id,
+      };
+      await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
+    }
   }
+
+  async getAlumnosList(): Promise<any[]> {
+    const alumnos = await lastValueFrom(this.clasesService.getAlumnosList());
+    return alumnos;
+  }
+
   
   
 
