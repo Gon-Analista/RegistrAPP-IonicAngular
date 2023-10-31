@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, Params} from '@angular/router';
 import { ClasesService } from '../services/clases.service';
-import { IClases } from 'src/app/models/IClases';
+import { IAsistencia } from 'src/app/models/IAsistencia';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
@@ -26,12 +26,10 @@ export class ProfesorPage implements OnInit {
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
   clases: any;
-  clase: IClases = {
+  asistencia: IAsistencia = {
     clase_id: 0,
-    asignatura_id: 0,
-    fecha: new Date(),
-    hora_inicio: { hours: 0, minutes: 0 },
-    hora_final: { hours: 0, minutes: 0 }
+    seccion_id: 0,
+    alumno_id: 0,
   };
 
   constructor(private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
@@ -39,11 +37,11 @@ export class ProfesorPage implements OnInit {
       this.userInfoReceived = {
         name: params['name'],
         username: params['username'],
-        role: params['role'],
+        id: params['id'],
       };
+      console.log("user info:",this.userInfoReceived);
     });
   }
-  
 
    ngAfterViewInit() {
     this.animation = this.animationCtrl
@@ -68,21 +66,35 @@ export class ProfesorPage implements OnInit {
   }
   
   ngOnInit() {
-    this.getClases();
+    this.getClases(this.userInfoReceived.id);
   }
   
-  async getClases() {
-    this.clases = await lastValueFrom(this.clasesService.getClasesList());
-    console.log(this.clases);
+  async getClases(profesorId: number) {
+    console.log("profesorId",profesorId);
+    this.clases = await lastValueFrom(this.clasesService.getClasesList(profesorId));
   }
-  
 
+  async crearAsistencia(clase: any) {
+    const listaAlumnos: any[] = await this.getAlumnosList();
+    for (const alumno of listaAlumnos) {
+      const asistencia: IAsistencia = {
+        clase_id: clase.clase_id,
+        seccion_id: clase.seccion_id,
+        alumno_id: alumno.alumno_id,
+      };
+      await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
+    }
+  }
+
+  async getAlumnosList(): Promise<any[]> {
+    const alumnos = await lastValueFrom(this.clasesService.getAlumnosList());
+    return alumnos;
+  }
+
+  
+  
 
   gotoAsis(){
     this.router.navigate(['/asistencia'])
   }
 }
-
-
-
-

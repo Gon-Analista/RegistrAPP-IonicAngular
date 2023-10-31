@@ -30,12 +30,12 @@
   }
 
 .buttons {
-  transform: scale(1); /* Tamaño original */
-  transition: transform 0.7s; /* Duración de la animación */
+  transform: scale(1); 
+  transition: transform 0.7s; 
 }
 
 .buttons:hover {
-  transform: scale(1.04); /* Aumenta el tamaño en un 10% cuando el mouse está sobre el botón */
+  transform: scale(1.04); 
 }
 
 div.btn2 ion-button {

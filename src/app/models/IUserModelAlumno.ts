@@ -1,4 +1,4 @@
-export interface UserModel {
+export interface UserModelAlumno {
 
 
 name: string,
@@ -7,6 +7,6 @@ email: string,
 username: string,
 password: string,
 role: string,
-profesor_id: number,
+alumno_id: number,
 
 }
