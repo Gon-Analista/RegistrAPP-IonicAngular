@@ -8,7 +8,7 @@ username: string,
 password: string,
 role: string,
 estado: boolean,
-profesor_id: number,
+id: number,
 
 
 }
