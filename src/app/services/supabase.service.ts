@@ -48,17 +48,17 @@ export class ServiciosService {
     return this.http.get<any[]>(this.URL_API + 'Asignacion?select=id_seccion(*)&id_usuario=eq.'+id_usuario, { headers: this.header, responseType: 'json' })
   }
 
+  /*
+  resetUserPassword(id_usuario: string, newPassword: string): Observable<HttpErrorResponse | any> {
+    const newPasswordData = { password: newPassword }; // Supongamos que la contraseña se actualiza en la tabla Users
+
+    return this.http.patch<any>(
+      `${this.URL_API}/users?id=eq.${id_usuario}`,
+      newPasswordData,
+      { headers: this.header, observe: 'response' }
+    );
+  }*/
 
 
-
-
-
-
-  
-
-
-
-
-
-  }
+}
   

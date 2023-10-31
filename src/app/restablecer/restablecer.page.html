@@ -1,29 +1,27 @@
-<ion-header [translucent]="true">
-  
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
+      <ion-title size="large">Restablecer Contraseña</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div class="duoc-icon">
-    <ion-img src="assets/img/duoc.jpg" ></ion-img>
+    <ion-img src="assets/img/duoc.jpg"></ion-img>
   </div>
   <div>
     <br>
-     <br>
+    <br>
     <div class="cabeza ion-padding">
       <div class="img1">
-        <ion-img src="assets/img/logo-hd.png" ></ion-img>
+        <ion-img src="assets/img/logo-hd.png"></ion-img>
       </div>
-      <ion-input label="Nombre de usuario" label-placement="floating" type="username"  fill="solid" placeholder="Usuario" [(ngModel)]="username"></ion-input>
-      <br/>
-      <ion-input label="Nueva Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Contraseña" [(ngModel)]="newPassword"></ion-input>
-      <br/>  
-      <ion-input label="Confirmar Contraseña" label-placement="floating" type="password"  fill="solid" placeholder="Confirmar Contraseña" [(ngModel)]="confirmPassword"></ion-input>
+      <ion-input label="Nombre de usuario" label-placement="floating" type="username" fill="solid" placeholder="Usuario" [(ngModel)]="username"></ion-input>
+      <br />
+      <ion-input label="Nueva Contraseña" label-placement="floating" type="password" fill="solid" placeholder="Contraseña" [(ngModel)]="newPassword"></ion-input>
+      <br />
+      <ion-input label="Confirmar Contraseña" label-placement="floating" type="password" fill="solid" placeholder="Confirmar Contraseña" [(ngModel)]="confirmPassword"></ion-input>
       <br>
       <div class="btn1 buttons">
         <ion-button (click)="resetPassword()">Confirmar Contraseña</ion-button>
@@ -31,16 +29,14 @@
     </div>
     <div class="btn2">
       <ion-button fill="clear" (click)="gotoLogin()">
-        <ion-icon name="arrow-back-outline" ></ion-icon>
+        <ion-icon name="arrow-back-outline"></ion-icon>
         Volver
       </ion-button>
     </div>
-
   </div>
   <footer>
-    <div >
-        <p class="footer">Privacy Policy - Duoc Uc</p>
+    <div>
+      <p class="footer">Privacy Policy - Duoc Uc</p>
     </div>
   </footer>
-
 </ion-content>
