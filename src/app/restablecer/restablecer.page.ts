@@ -29,7 +29,7 @@ export class RestablecerPage implements OnInit {
     if (state && state.usersMap) {
       this.usersMap = state.usersMap;
     } else {
-      // Manejar el caso en el que no se proporciona un usersMap válido
+      
       console.error('No se encontró usersMap en el estado de navegación.');
     }
   }

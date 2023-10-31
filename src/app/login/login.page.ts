@@ -26,11 +26,6 @@ export class LoginPage implements OnInit {
     password: ''
   };
 
-  logout() {
-    localStorage.removeItem('TOKEN_ALUMNO');
-    localStorage.removeItem('TOKEN_PROFESOR');
-  }
-
   constructor(private router: Router, private alertController: AlertController,private animationCtrl: AnimationController, private servicio: ServiciosService) {
    
   }
@@ -54,7 +49,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.userLoginModalRestart();
-    this.logout()
   }
 
   gotoPerfil() {

@@ -9,6 +9,7 @@ import { IClases } from 'src/app/models/IClases';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profesor',
@@ -33,13 +34,13 @@ export class ProfesorPage implements OnInit {
     alumno_id: 0,
   };
 
-
   logout() {
     localStorage.removeItem('TOKEN_PROFESOR');
     this.router.navigate(['/login']); 
   }
+  
 
-  constructor(private alertController: AlertController, private clasesService: ClasesService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private clasesService: ClasesService  , private alertController: AlertController,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController,private loadingController: LoadingController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -83,6 +84,7 @@ export class ProfesorPage implements OnInit {
 
   async crearAsistencia(clase: any) {
     const listaAlumnos: any[] = await this.getAlumnosList();
+    this.presentLoading();
     for (const alumno of listaAlumnos) {
       const asistencia: IAsistencia = {
         clase_id: clase.clase_id,
@@ -97,6 +99,7 @@ export class ProfesorPage implements OnInit {
     const alumnos = await lastValueFrom(this.clasesService.getAlumnosList());
     return alumnos;
   }
+  
 
 
   async deleteClase(clase: any): Promise<void> {
@@ -136,13 +139,36 @@ export class ProfesorPage implements OnInit {
       ],
     });
     await alert.present();
+  
+    
+    
+  }
+
+async presentSuccessAlert() {
+  const alert = await this.alertController.create({
+    header: 'Éxito',
+    message: 'La operación se ha completado con éxito.',
+    buttons: ['Aceptar']
+  });
+
+  await alert.present();
+}
+
+  
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Procesando...',
+      duration: 2000, 
+      translucent: true,
+    });
+  
+    await loading.present();
+  
+    
+    loading.onDidDismiss().then(() => {
+      this.presentSuccessAlert();
+    });
   }
   
 
-  
-  
-
-  gotoAsis(){
-    this.router.navigate(['/asistencia'])
-  }
 }

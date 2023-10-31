@@ -31,6 +31,13 @@ export class ClasesService {
       );
     }
 
+  getAlumnosPresentes(): Observable<any> {
+      return this.http.get<any>(
+        `${this.supaurl}asistencias?select=alumno_id(*)&estado=eq.True`,
+        { headers: this.supaheader }
+      );
+  }
+
   crearAsistencia(asistencia: IAsistencia): Observable<any> {
       return this.http.post(`${this.supaurl}/asistencias`, asistencia, { headers:this.supaheader });
     }
@@ -41,7 +48,6 @@ export class ClasesService {
     }
     
     
-
   
 
   

@@ -1,13 +1,13 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserModelAlumno } from 'src/app/models/IUserModelAlumno';
 import { AsistenciaService } from '../services/asistencia.service';
 import { Animation, AnimationController } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
-
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'alumno.page.html',
@@ -30,9 +30,9 @@ export class PerfilPage implements OnInit{
     localStorage.removeItem('TOKEN_ALUMNO');
     this.router.navigate(['/login']); 
   }
-  
+
   private animation!: Animation;
-  constructor(private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private alertController: AlertController,private loadingControl: LoadingController,private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -79,6 +79,34 @@ export class PerfilPage implements OnInit{
     const alumno_id = this.userInfoReceived.id;
     const nuevoEstadoT = true;
     await lastValueFrom(this.AsistenciaService.updateClaseEstado(alumno_id,clase_id,nuevoEstadoT));
+    this.presentLoading();
   }
+
+  async presentSuccessAlert() {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: 'La operación se ha completado con éxito.',
+      buttons: ['Aceptar']
+    });
+  
+    await alert.present();
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingControl.create({
+      message: 'Procesando...',
+      duration: 2000, 
+      translucent: true,
+    });
+  
+    await loading.present();
+  
+  
+    loading.onDidDismiss().then(() => {
+      this.presentSuccessAlert()
+    });
+  }
+  
+
 }
 
