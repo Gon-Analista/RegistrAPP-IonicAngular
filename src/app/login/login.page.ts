@@ -78,7 +78,7 @@ export class LoginPage implements OnInit {
         });
       } else if (alumno && alumno.password === userLoginInfo.password) {
         console.log('Usuario ingresado es alumno:', alumno.username, alumno.password, alumno.alumno_id);
-        // Almacena el token de autenticación en el localStorage.
+        // Almacena el token de autenticación en el localStorage
         localStorage.setItem('TOKEN', 'Token'); // Reemplaza 'TOKEN_DEL_ALUMNO' con el token real.
         this.router.navigate(['/alumno'], {
           queryParams: {
