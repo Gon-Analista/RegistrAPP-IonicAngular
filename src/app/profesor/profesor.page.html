@@ -69,9 +69,6 @@
     </ion-item>
   </div>
 </div>
-<footer class="footer ion-text-center">
-  <p>Privacy Policy - Duoc Uc</p>
-</footer>
 <div *ngIf="showAsistenciaContent">
   <ion-list>
     <ng-container *ngIf="clases && clases.length > 0; else noClasses">
@@ -87,7 +84,7 @@
           </ion-label>
         </ion-item>
         <ion-item-options>
-          <ion-item-option color="medium" (click)="crearAsistencia(clase)">
+          <ion-item-option color="medium" (click)="generateQRCode(clase)">
             <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -100,6 +97,22 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
+      <div class="qrcodeImage ion-align-items-center ion-text-center" *ngIf="qrCodeValue">
+        <qrcode
+            [qrdata]="qrCodeValue"
+            [allowEmptyString]="true"
+            [ariaLabel]="'QR Code image with the following content...'"
+            [cssClass]="'center'"
+            [colorDark]="'#1c255b'"
+            [colorLight]="'#ffffffff'"
+            [elementType]="'canvas'"
+            [errorCorrectionLevel]="'M'"
+            [margin]="4"
+            [scale]="1"
+            [title]="'A custom title attribute'"
+            [width]="300"
+        ></qrcode>
+      </div>
     </ng-container>
     <ng-template #noClasses>
       <div class="ion-text-center no-classes-message">No hay clases registradas.</div>

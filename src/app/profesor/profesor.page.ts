@@ -14,6 +14,7 @@ import { IonModal } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { ModalPagePage } from '../modal-page/modal-page.page';
 import { ToastController } from '@ionic/angular';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './profesor.page.html',
   styleUrls: ['./profesor.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule,QRCodeModule]
 })
 export class ProfesorPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
@@ -29,6 +30,7 @@ export class ProfesorPage implements OnInit {
   showAsistenciaContent: boolean = false;
   userInfoReceived: any;
   name: any;
+  qrCodeValue: any | null = null;
   selectedClase: any;
   idUserHtmlRouterLink: any;
   @ViewChild(IonModal) modal!: IonModal;
@@ -47,8 +49,32 @@ export class ProfesorPage implements OnInit {
     localStorage.removeItem('TOKEN_PROFESOR');
     this.router.navigate(['/login']); 
   }
-  
 
+  async generateQRCode(clase: any) {
+    const existeAsistencia = await this.verificarAsistenciaExistente(clase.clase_id, clase.seccion_id);
+  
+    if (existeAsistencia) {
+      this.popupClaseExistente(clase)
+    } else {
+      const listaAlumnos: any[] = await this.getAlumnosList();
+      this.presentLoading(clase);
+      
+      for (const alumno of listaAlumnos) {
+        const asistencia: IAsistencia = {
+          clase_id: clase.clase_id,
+          seccion_id: clase.seccion_id,
+          alumno_id: alumno.alumno_id,
+        };
+  
+        await lastValueFrom(this.clasesService.crearAsistencia(asistencia));
+      }
+      const qrData = JSON.stringify({
+        clase_id: clase.clase_id,
+        seccion_id: clase.seccion_id,
+    });
+      this.qrCodeValue = qrData;
+    }
+}
   constructor(private toastController: ToastController,private modalController: ModalController,private clasesService: ClasesService  , private alertController: AlertController,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController,private loadingController: LoadingController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
