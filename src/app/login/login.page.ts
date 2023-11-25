@@ -48,6 +48,8 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.removeItem('TOKEN_ALUMNO');
+    localStorage.removeItem('TOKEN_PROFESOR');
     this.userLoginModalRestart();
   }
 
@@ -58,7 +60,7 @@ export class LoginPage implements OnInit {
   async userLogin(userLoginInfo: IUserLogin): Promise<void> {
     const profesor = await lastValueFrom(this.servicio.getLoginProfesores(userLoginInfo));
     const alumno = await lastValueFrom(this.servicio.getLoginAlumnos(userLoginInfo));
-  
+    
     if (!userLoginInfo.username || !userLoginInfo.password) {
       await this.showAlert('Campos en blanco', 'Por favor, complete ambos campos.');
     } else {

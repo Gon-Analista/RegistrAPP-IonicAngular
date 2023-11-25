@@ -69,6 +69,9 @@
     </ion-item>
   </div>
 </div>
+<footer class="footer ion-text-center">
+  <p>Privacy Policy - Duoc Uc</p>
+</footer>
 <div *ngIf="showAsistenciaContent">
   <ion-list>
     <ng-container *ngIf="clases && clases.length > 0; else noClasses">
@@ -92,8 +95,8 @@
           <ion-item-option color="danger" (click)="deleteClase(clase)">
             <ion-icon slot="icon-only" name="trash"></ion-icon>
           </ion-item-option>
-          <ion-item-option color="warning">
-            <ion-icon slot="icon-only" name="document-outline"></ion-icon>
+          <ion-item-option color="warning" (click)="openModal(clase)">
+            <ion-icon  slot="icon-only" name="document-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
@@ -102,8 +105,3 @@
       <div class="ion-text-center no-classes-message">No hay clases registradas.</div>
     </ng-template>
   </ion-list>
-  
-<footer class="footer ion-text-center">
-      <p>Privacy Policy - Duoc Uc</p>
-</footer>
-
