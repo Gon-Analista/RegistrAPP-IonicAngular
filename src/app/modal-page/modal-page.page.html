@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Asistencia</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()" class="modalClose">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let alumno of alumnos">
+      <ion-label>
+        <h2>{{ alumno.alumno_id.name }} {{ alumno.alumno_id.last_name }}</h2>
+        <p>Estado: {{ alumno.estado ? 'Presente' : 'Ausente' }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

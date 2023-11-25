@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlertController, IonicModule } from '@ionic/angular';
@@ -8,6 +8,7 @@ import { AsistenciaService } from '../services/asistencia.service';
 import { Animation, AnimationController } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
+import { ClasesService } from '../services/clases.service';
 @Component({
   selector: 'app-home',
   templateUrl: 'alumno.page.html',
@@ -32,7 +33,7 @@ export class PerfilPage implements OnInit{
   }
 
   private animation!: Animation;
-  constructor(private alertController: AlertController,private loadingControl: LoadingController,private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
+  constructor(private clasesService: ClasesService ,private alertController: AlertController,private loadingControl: LoadingController,private AsistenciaService: AsistenciaService  ,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController) {
     this.route.queryParams.subscribe((params: Params) => {
       this.userInfoReceived = {
         name: params['name'],
@@ -69,25 +70,48 @@ export class PerfilPage implements OnInit{
   ngOnInit() {
     this.getAsist(this.userInfoReceived.id);
   }
-  
+  public asistenciaActualizada: EventEmitter<void> = new EventEmitter<void>();
+
+  actualizarAsistencia() {
+    this.asistenciaActualizada.emit();
+  }
+
   async getAsist(alumnoId: number) {
     this.clases = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
     console.log("asistencia:",this.clases);
+    this.actualizarAsistencia();
   }
 
-  async updateClaseEstado(clase_id : number) {
+  async updateClaseEstado(clase: any) {
     const alumno_id = this.userInfoReceived.id;
+
+    const asistencias = await lastValueFrom(
+      this.clasesService.getAsistenciasPorClaseYSeccion(clase.clase_id, clase.seccion_id)
+    );
+    const alumnoYaPresente = asistencias.find((asistencia: any) => asistencia.clase_id === clase.clase_id);
+
+    if (alumnoYaPresente && alumnoYaPresente.estado === true) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Ya has marcado tu presencia en esta clase',
+        buttons: ['Aceptar']
+      });
+  
+      await alert.present();
+      return;
+    }
     const nuevoEstadoT = true;
-    await lastValueFrom(this.AsistenciaService.updateClaseEstado(alumno_id,clase_id,nuevoEstadoT));
+    await lastValueFrom(this.AsistenciaService.updateClaseEstado(alumno_id, clase.clase_id, nuevoEstadoT));
     this.presentLoading();
   }
+  
 
   async presentSuccessAlert() {
     const alert = await this.alertController.create({
       header: 'Éxito',
-      message: 'La operación se ha completado con éxito.',
+      message: 'El alumno ' + this.userInfoReceived.name + ' ha sido marcado como presente.',  
       buttons: ['Aceptar']
-    });
+    }); 
   
     await alert.present();
   }

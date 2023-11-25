@@ -23,7 +23,11 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'login',
     pathMatch: 'full',
+  },  {
+    path: 'modal-page',
+    loadComponent: () => import('./modal-page/modal-page.page').then( m => m.ModalPagePage)
   }
+
 
 
 
