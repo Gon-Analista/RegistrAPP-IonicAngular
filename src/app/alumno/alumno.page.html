@@ -1,4 +1,4 @@
-  <ion-header [translucent]="true">
+  <ion-header [style.visibility]="content_visibility">
     <ion-toolbar class="ion-align-items-center">
       <ion-buttons slot="start">
         <ion-img src="assets/img/duoc.jpg" class="duoc-icon"></ion-img>
@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="true">
+  <ion-content [style.visibility]="content_visibility">
     <ion-header collapse="condense">
       <ion-toolbar>
         <ion-title size="large">perfil</ion-title>
@@ -87,12 +87,15 @@
               <p>Sede: {{ clase.secciones.sede_id.nombre_sede }}</p>
             </ion-label>
           </ion-item>
-          <ion-item-options>
-            <ion-item-option color="medium" (click)="updateClaseEstado(clase)">
+          <ion-item-options [style.visibility]="content_visibility">
+            <ion-item-option color="medium" (click)="startScan()">
               <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
             </ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
+        <ion-item>
+          <ion-item class="ion-text-wrap">Scanned result: {{scannedResult}}</ion-item>
+        </ion-item>
       </ng-container>
       <ng-template #noClasses>
         <div class="ion-text-center no-classes-message">No hay clases abiertas en este momento.</div>
@@ -100,8 +103,5 @@
     </ion-list>
     <br>
   </div>
-  <footer class="footer ion-text-center">
-        <p>Privacy Policy - Duoc Uc</p>
-  </footer>
 
   </ion-content>

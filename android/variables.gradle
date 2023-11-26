@@ -13,4 +13,11 @@ ext {
     androidxJunitVersion = '1.1.5'
     androidxEspressoCoreVersion = '3.5.1'
     cordovaAndroidVersion = '10.1.1'
+    ext.androidxCameraCamera2Version = '1.1.0'
+    ext.androidxCameraCoreVersion = '1.1.0'
+    ext.androidxCameraLifecycleVersion = '1.1.0'
+    ext.androidxCameraViewVersion = '1.1.0'
+    ext.mlkitBarcodeScanningVersion = '17.1.0'
+    ext.playServicesCodeScannerVersion = '16.0.0'
+
 }

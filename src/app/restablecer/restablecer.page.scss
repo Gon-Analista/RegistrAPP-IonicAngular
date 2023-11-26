@@ -19,11 +19,12 @@
 
 
 .footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 32%;
+}
 
 div.btn2 ion-button {
     text-transform: capitalize;
