@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable, catchError} from 'rxjs';
 import { IAsistencia } from '../models/IAsistencia';
 
 @Injectable({
@@ -21,8 +21,14 @@ export class AsistenciaService {
       return this.http.get<any>(
         `${this.supaurl}asistencias?alumno_id=eq.${alumnoId}&select=*,clases(fecha,sala,asignatura_id(nombre_asignatura)),secciones:seccion_id(nombre_seccion,sede_id(nombre_sede))`,
         { headers: this.supaheader }
+      ).pipe(
+        catchError(error => {
+          console.error('Error en la solicitud de asistencias:', error);
+          throw error;
+        })
       );
     }
+    
 
   updateClaseEstado(alumno_id: number, clase_id: number, nuevoEstado: boolean): Observable<any> {
     const url = `${this.supaurl}asistencias?alumno_id=eq.${alumno_id}&clase_id=eq.${clase_id}`;

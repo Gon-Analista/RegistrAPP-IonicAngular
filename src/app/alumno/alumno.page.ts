@@ -1,16 +1,18 @@
-  import { Component, OnInit, ElementRef, ViewChild, EventEmitter, OnDestroy } from '@angular/core';
+  import { Component, OnInit, ElementRef, ViewChild, Injectable , OnDestroy } from '@angular/core';
   import { CommonModule } from '@angular/common';
   import { FormsModule } from '@angular/forms';
   import { AlertController, IonicModule } from '@ionic/angular';
   import { ActivatedRoute, Params, Router } from '@angular/router';
-  import { UserModelAlumno } from 'src/app/models/IUserModelAlumno';
   import { AsistenciaService } from '../services/asistencia.service';
   import { Animation, AnimationController } from '@ionic/angular';
-  import { lastValueFrom } from 'rxjs';
+  import { lastValueFrom,BehaviorSubject,Subscription   } from 'rxjs';
   import { LoadingController } from '@ionic/angular';
   import { ClasesService } from '../services/clases.service';
   import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-  import { QRCodeModule } from 'angularx-qrcode';
+
+  @Injectable({
+    providedIn: 'root'
+  })
 
   @Component({
     selector: 'app-home',
@@ -20,6 +22,8 @@
     imports: [IonicModule, CommonModule, FormsModule],
   })
   export class PerfilPage implements OnInit,OnDestroy {
+    private asistenciasSubject = new BehaviorSubject<any[]>([]);
+    private asistenciasSubscription: Subscription | undefined;
     scannedResult: any;  
     showPerfilContent: boolean = true;
     showAsistenciaContent: boolean = false;
@@ -31,13 +35,14 @@
     clases: any;
     nuevoEstado: any;
 
+    getAsistenciasObservable() {
+      return this.asistenciasSubject.asObservable();
+    }
 
     async checkPermission(): Promise<boolean> {
       try {
-        // check or request permission
         const status = await BarcodeScanner.checkPermission({ force: true });
         if (status.granted) {
-          // the user granted permission
           return true;
         }
         return false;
@@ -46,6 +51,8 @@
         throw e;
       }
     }
+
+    
     
     async startScan() {
       try {
@@ -96,6 +103,8 @@
         };
         console.log("user info:",this.userInfoReceived);
       });
+
+      
       
     }
 
@@ -123,17 +132,14 @@
     
     ngOnInit() {
       this.getAsist(this.userInfoReceived.id);
-    }
-    public asistenciaActualizada: EventEmitter<void> = new EventEmitter<void>();
 
-    actualizarAsistencia() {
-      this.asistenciaActualizada.emit();
     }
+
 
     async getAsist(alumnoId: number) {
-      this.clases = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
-      console.log("asistencia:",this.clases);
-      this.actualizarAsistencia();
+      const asistencias = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
+      this.asistenciasSubject.next(asistencias);
+      console.log("asistencia:", asistencias);
     }
 
     async updateClaseEstado(claseId: number, seccionId: number) {
