@@ -9,10 +9,8 @@
   import { LoadingController } from '@ionic/angular';
   import { ClasesService } from '../services/clases.service';
   import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+  
 
-  @Injectable({
-    providedIn: 'root'
-  })
 
   @Component({
     selector: 'app-home',
@@ -22,8 +20,7 @@
     imports: [IonicModule, CommonModule, FormsModule],
   })
   export class PerfilPage implements OnInit,OnDestroy {
-    private asistenciasSubject = new BehaviorSubject<any[]>([]);
-    private asistenciasSubscription: Subscription | undefined;
+    private asistenciaActualizada: BehaviorSubject<void> = new BehaviorSubject<void>(undefined!);
     scannedResult: any;  
     showPerfilContent: boolean = true;
     showAsistenciaContent: boolean = false;
@@ -35,9 +32,6 @@
     clases: any;
     nuevoEstado: any;
 
-    getAsistenciasObservable() {
-      return this.asistenciasSubject.asObservable();
-    }
 
     async checkPermission(): Promise<boolean> {
       try {
@@ -122,6 +116,7 @@
     toggleContent(event: any) {
       const tab = event.detail.value;
       if (tab === 'perfil') {
+        this.notificarCambioAsistencia();
         this.showPerfilContent = true;
         this.showAsistenciaContent = false;
       } else if (tab === 'asistencia') {
@@ -131,15 +126,22 @@
     }
     
     ngOnInit() {
-      this.getAsist(this.userInfoReceived.id);
-
+      this.asistenciaActualizada.subscribe(
+        () => {
+          this.getAsist(this.userInfoReceived.id);
+        });
     }
 
+    notificarCambioAsistencia() {
+      this.asistenciaActualizada.next( undefined);
+    }
+    obtenerObservableCambioAsistencia() {
+      return this.asistenciaActualizada.asObservable();
+    }
 
     async getAsist(alumnoId: number) {
-      const asistencias = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
-      this.asistenciasSubject.next(asistencias);
-      console.log("asistencia:", asistencias);
+      this.clases = await lastValueFrom(this.AsistenciaService.getAsistenciaList(alumnoId));
+      console.log("asistencia:",this.clases);
     }
 
     async updateClaseEstado(claseId: number, seccionId: number) {
