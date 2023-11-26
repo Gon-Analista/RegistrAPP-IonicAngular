@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, map } from 'rxjs';
 import { UserModel } from '../models/IUserModel';
 import { UserModelAlumno } from '../models/IUserModelAlumno';
-import { ISecciones } from '../models/ISecciones';
 import { IUserLogin } from '../models/IUserLogin';
 
 @Injectable({

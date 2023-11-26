@@ -5,7 +5,6 @@ import { AlertController, IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router, Params} from '@angular/router';
 import { ClasesService } from '../services/clases.service';
 import { IAsistencia } from 'src/app/models/IAsistencia';
-import { IClases } from 'src/app/models/IClases';
 import { lastValueFrom, throwError } from 'rxjs';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { Animation, AnimationController } from '@ionic/angular';
