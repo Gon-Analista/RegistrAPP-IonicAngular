@@ -97,13 +97,13 @@
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-      <div class="qrcodeImage ion-align-items-center ion-text-center" *ngIf="qrCodeValue">
+      <div class="qrcode-container qrcodeImage ion-align-items-center ion-text-center" *ngIf="qrCodeValue && mostrarCodigoQR">
         <qrcode
             [qrdata]="qrCodeValue"
             [allowEmptyString]="true"
             [ariaLabel]="'QR Code image with the following content...'"
             [cssClass]="'center'"
-            [colorDark]="'#1c255b'"
+            [colorDark]="'#000000'"
             [colorLight]="'#ffffffff'"
             [elementType]="'canvas'"
             [errorCorrectionLevel]="'M'"
@@ -112,6 +112,10 @@
             [title]="'A custom title attribute'"
             [width]="300"
         ></qrcode>
+        <div class="tiempo-restante ion-text-bold">
+          <ion-icon name="timer-outline" class="timer-icon"></ion-icon>
+          {{ tiempoRestante }} Segundos restantes
+        </div>
       </div>
     </ng-container>
     <ng-template #noClasses>

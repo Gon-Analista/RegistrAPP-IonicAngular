@@ -29,6 +29,7 @@ export class ProfesorPage implements OnInit {
   showPerfilContent: boolean = true;
   showAsistenciaContent: boolean = false;
   userInfoReceived: any;
+  tiempoRestante: number = 60;
   name: any;
   qrCodeValue: any | null = null;
   selectedClase: any;
@@ -37,6 +38,7 @@ export class ProfesorPage implements OnInit {
   @ViewChild('label2', { read: ElementRef }) label2!: ElementRef;
   @ViewChild('QR', { read: ElementRef }) QR!: ElementRef;
   private animation!: Animation;
+  mostrarCodigoQR: boolean = true;
   clases: any;
   alumnos: any;
   asistencia: IAsistencia = {
@@ -73,6 +75,14 @@ export class ProfesorPage implements OnInit {
         seccion_id: clase.seccion_id,
     });
       this.qrCodeValue = qrData;
+      const interval = setInterval(() => {
+        this.tiempoRestante--;
+  
+        if (this.tiempoRestante <= 0) {
+          this.mostrarCodigoQR = false;
+          clearInterval(interval); 
+        }
+      }, 1000);
     }
 }
   constructor(private toastController: ToastController,private modalController: ModalController,private clasesService: ClasesService  , private alertController: AlertController,private route: ActivatedRoute, private router: Router, private animationCtrl: AnimationController,private loadingController: LoadingController) {

@@ -9,6 +9,29 @@
     margin-left: 10px;
 }
 
+.qrcode-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; 
+}
+
+.tiempo-restante {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #636363;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.timer-icon {
+  margin-right: 5px;
+  color: #3880ff; 
+  font-size: 22px; 
+}
+
 .duoc-icon {
   width: 80px; 
   height: auto; 
